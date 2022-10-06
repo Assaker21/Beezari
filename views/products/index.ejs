@@ -1,0 +1,9 @@
+<%- include('../partials/header.ejs') %>
+<form class="create-product-button-container" action="/products/new" method="GET">
+    <button type="submit" class="create-product-button">CREATE PRODUCT</button>
+</form>
+<div class="products-container">
+  <% products.forEach(product => { %> 
+      <%- include('./product.ejs', {product: product}) %> 
+  <% }); %>
+</div>

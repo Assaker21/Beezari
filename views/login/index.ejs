@@ -1,0 +1,17 @@
+<form class="login-container" action="/login" method="GET" >
+  <input
+    type="text"
+    class="login-input-box login-username-input"
+    placeholder="Username"
+    name="username"
+    value="<%= searchOptions.username %>"
+  />
+  <input
+    type="password"
+    class="login-input-box login-password-input"
+    placeholder="Password"
+    name="password"
+  />
+  <button type="submit" class="login-button">Login</button>
+  <span class="login-message <%= connectionType %>"><%= connectionMessage %></span>
+</form>

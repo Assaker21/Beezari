@@ -1,0 +1,53 @@
+<div class="product-capsule">
+  <div class="product-container">
+    <div class="product-images-container">
+        <% for(i = 0; i < product.images.length; i++) { %>
+            <img class="product-image" src= <%=product.images[i] %>> 
+        <%}%>
+    </div>
+    <div class="product-details-container">
+      <div class="product-details-item">
+        <label for="sku">SKU:</label>
+        <span id="sku"><%= product.sku %></span><br />
+      </div>
+      <div class="product-details-item">
+        <label for="brand">Brand:</label>
+        <span id="brand"><%= product.brand %></span><br />
+      </div>
+      <div class="product-details-item">
+        <label for="name">Name:</label>
+        <span id="name"><%= product.name %></span><br />
+      </div>
+      <div class="product-details-item">
+        <label for="short">Short Description:</label>
+          <span id="short"><%= product.short_description %></span><br />
+      </div>
+      <div class="product-details-item">
+        <label for="long">Long Description:</label>
+        <span id="long"><%= product.long_description %></span><br />
+      </div>
+      <div class="product-details-item">
+        <label for="price">Price:</label>
+        <span id="price"><%= product.price %></span><br />
+      </div>
+      <div class="product-details-item">
+        <label for="discounted">Discounted Price:</label>
+        <span id="discounted"><%= product.discounted_price %></span><br />
+      </div>
+      <div class="product-details-item">
+        <label for="quantity">Quantity:</label>
+        <span id="quantity"><%= product.quantity %></span><br />
+      </div>
+      <div class="product-details-item">
+        <label for="purchase">Purchase Power:</label>
+        <span id="purchase"><%= product.purchase_power %></span>
+      </div>
+    </div>
+    <div class="product-action-buttons-container">
+      <form class="product-edit-button-container" method="GET" action="/products/edit">
+        <input type="hidden" name="id" value=<%= product._id.toString() %>>
+        <button type="submit" class="product-edit-button">EDIT PRODUCT</button>
+    </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,78 @@
+<%- include('../partials/header.ejs') %>
+<div class="products-container">
+  <div class="product-capsule">
+    <div class="product-container">
+      <div class="product-images-container">
+          <% for(i = 0; i < product.images.length; i++) { %>
+            <div class="product-image-container">  
+              <img class="product-image" src=<%=product.images[i] %>>
+              <i class='bx bxs-x-square'></i>
+              <textarea rows="5" id="product-image-link"><%=product.images[i] %></textarea>
+            </div>
+          <%}%>
+          <i class='bx bxs-plus-circle product-images-add'></i>
+      </div>
+      <form class="product-details-container" method="POST" action="/products/edit">
+        <div class="product-details-item">
+          <label for="sku">SKU:</label>
+          <input id="sku" name="sku" value=<%= product.sku %>><br />
+        </div>
+        <div class="product-details-item">
+          <label for="brand">Brand:</label>
+          <input id="brand" name="brand" value=<%= product.brand %>><br />
+        </div>
+        <div class="product-details-item">
+          <label for="name">Name:</label>
+          <input id="name" name="name" value=<%= product.name %>><br />
+        </div>
+        <div class="product-details-item">
+          <label for="short">Short Description:</label>
+          <textarea id="short" name="short"><%= product.short_description %></textarea><br />
+        </div>
+        <div class="product-details-item">
+          <label for="long">Long Description:</label>
+          <textarea rows="5" id="long" name="long"><%= product.long_description %></textarea><br />
+        </div>
+        <div class="product-details-item">
+          <label for="price">Price:</label>
+          <input id="price" name="price" value=<%= product.price %>><br />
+        </div>
+        <div class="product-details-item">
+          <label for="discounted">Discounted Price:</label>
+          <input id="discounted" name="discounted" value=<%= product.discounted_price %>><br />
+        </div>
+        <div class="product-details-item">
+          <label for="quantity">Quantity:</label>
+          <input id="quantity" name="quantity" value=<%= product.quantity %>><br />
+        </div>
+        <div class="product-details-item">
+          <label for="purchase">Purchase Power:</label>
+          <span id="purchase"><%= product.purchase_power %></span>
+        </div>
+        
+        <div class="product-details-categories">
+          <label for="categoryi"> Select Cars </label>
+          <input id="categoryi" type="checkbox">
+          <label for="subcategoryij">Sub Category</label>
+          <input id="subcategoryij" type="checkbox">
+          <label for="microcategorijk">Micro Category</label>  
+          <input id="microcategorijk" type="checkbox">
+        </div>
+        
+        <input type="hidden" name="id" value=<%= product._id.toString() %>>
+        <button type="submit" class="product-save-button">SAVE</button>
+      </form>
+      <div class="product-action-buttons-container">
+        <form class="product-cancel-button-container" method="GET" action="/products">
+          <input type="hidden" name="id" value=<%= product._id.toString() %>>
+          <button type="submit" class="product-cancel-button">CANCEL</button>
+        </form>
+        <form class="product-delete-button-container" method="GET" action="/products/delete">
+          <input type="hidden" name="id" value=<%= product._id.toString() %>>
+          <button type="submit" class="product-delete-button">DELETE</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+</div>
