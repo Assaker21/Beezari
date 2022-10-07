@@ -2,8 +2,9 @@
   <div class="product-container">
     <div class="product-images-container">
         <% for(i = 0; i < product.images.length; i++) { %>
+          <% if(product.images[i] != "" && product.images[i] != null) { %>
             <img class="product-image" src= <%=product.images[i] %>> 
-        <%}%>
+        <%}}%>
     </div>
     <div class="product-details-container">
       <div class="product-details-item">
@@ -41,6 +42,16 @@
       <div class="product-details-item">
         <label for="purchase">Purchase Power:</label>
         <span id="purchase"><%= product.purchase_power %></span>
+      </div>
+
+      <div class="product-details-categories">
+        <label>Categories:</label> <br />
+        <% for(i = 0; i < product.categories.length; i++) { %>
+          <label><%= product.categories[i].category + " > "%></label>
+          <label><%= product.categories[i].sub_category + " > "%></label>
+          <label><%= product.categories[i].micro_category %></label>
+          <br />
+        <% } %>
       </div>
     </div>
     <div class="product-action-buttons-container">

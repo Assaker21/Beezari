@@ -2,17 +2,11 @@
 <div class="products-container">
   <div class="product-capsule">
     <div class="product-container">
-      <div class="product-images-container">
-          <% for(i = 0; i < product.images.length; i++) { %>
-            <div class="product-image-container">  
-              <img class="product-image" src=<%=product.images[i] %>>
-              <i class='bx bxs-x-square'></i>
-              <textarea rows="5" id="product-image-link"><%=product.images[i] %></textarea>
-            </div>
-          <%}%>
-          <i class='bx bxs-plus-circle product-images-add'></i>
-      </div>
-      <form class="product-details-container" method="POST" action="/products/edit">
+      <form method="POST" action="/products/edit">
+        <div class="product-images-container">
+          <input class="filepond" name="uploadedImages" type="file" multiple data-max-file-size="10MB" data-max-files="8">
+        </div>
+        <div class="product-details-container">
         <div class="product-details-item">
           <label for="sku">SKU:</label>
           <input id="sku" name="sku" value=<%= product.sku %>><br />
@@ -61,6 +55,7 @@
         
         <input type="hidden" name="id" value=<%= product._id.toString() %>>
         <button type="submit" class="product-save-button">SAVE</button>
+        </div>
       </form>
       <div class="product-action-buttons-container">
         <form class="product-cancel-button-container" method="GET" action="/products">
@@ -75,4 +70,11 @@
     </div>
   </div>
   
+</div>
+<div class="old-images">
+  <% for(i = 0; i < product.images.length; i++) { %>
+    <% if(product.images[i] != "" && product.images[i] != null) { %>
+      <img src=<%= product.images[i] %> id=<%="old-image" + i%> class="old-image">
+    <% } %>
+  <% } %>  
 </div>
