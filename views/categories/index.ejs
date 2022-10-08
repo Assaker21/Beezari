@@ -1,0 +1,54 @@
+<%- include('../partials/header.ejs') %>
+
+<form class="categories-container" action="/categories" method="POST">
+    <% for(i = 0; i < categories.length; i++) {%>
+    <div class="category-container">
+        <div class="category-handle-container">
+            <i class='bx bx-menu handle'></i>
+        </div>
+        <div class="category-item-container">
+            <div class="category-details-container">
+                <input class="category-name" type="text" name="categoryName" value=<%= categories[i].name %>>
+                <i class='bx bxs-trash-alt' ></i>
+            </div>
+            <div class="subcategories-container">
+                <% for(j = 0; j < categories[i].sub.length; j++) {%>
+                <div class="subcategory-container">
+                    <div class="subcategory-handle-container">
+                        <i class='bx bx-menu handle'></i>
+                    </div>
+                    <div class="subcategory-item-container">
+                        <div class="subcategory-details-container">
+                            <input class="subcategory-name" type="text" name="subcategoryName" value=<%= categories[i].sub[j].name %>>
+                            <i class='bx bxs-trash-alt' ></i>
+                        </div>
+                        <div class="microcategories-container">
+                            <% for(k = 0; k < categories[i].sub[j].micro.length; k++) { %>
+                            <div class="microcategory-container">
+                                <div class="microcategory-handle-container">
+                                    <i class='bx bx-menu handle'></i>
+                                </div>
+                                <div class="microcategory-item-container">
+                                    <div class="microcategory-details-container">
+                                        <input class="microcategory-name" type="text" name="microcategoryName" value=<%= categories[i].sub[j].micro[k] %>>
+                                        <i class='bx bxs-trash-alt' ></i>
+                                    </div>
+                                </div>  
+                            </div>
+                            <% } %>   
+                            <input type="hidden" name="microcategoriesCount" class="microcategoriesCount">                 
+                            <button class="microcategory-add-one button" type="button">ADD MICROCATEGORY</button>
+                        </div>
+                    </div>
+                </div>
+                <% } %>
+                <input type="hidden" name="subcategoriesCount" class="subcategoriesCount">
+                <button class="subcategory-add-one button" type="button">ADD SUBCATEGORY</button>
+            </div>
+        </div>
+    </div>
+    <% } %>
+    <input type="hidden" name="categoriesCount" class="categoriesCount">
+    <button class="category-add-one button" type="button">ADD CATEGORY</button>
+    <button class="button" type="submit">SAVE</button>
+</form>

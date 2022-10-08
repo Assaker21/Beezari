@@ -1,0 +1,141 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Karla", sans-serif;
+  text-decoration: none;
+  list-style: none;
+  scroll-behavior: smooth;
+}
+
+.categories-container {
+  width: 100%;
+  max-width: 1366px;
+  margin: 10px auto;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 60000px));
+  gap: 20px;
+}
+
+.category-container {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.category-item-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.subcategories-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 3px;
+  margin: -3px;
+}
+
+.subcategory-container {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.subcategory-item-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.subcategory-details-container {
+  white-space: nowrap;
+}
+
+.microcategories-container {
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.microcategory-container {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.microcategory-details-container {
+  white-space: nowrap;
+}
+
+.categories-container input {
+  font-size: 18px;
+  font-weight: 600;
+  border: none;
+  outline: 1px solid black;
+  border-radius: 2px;
+  padding: 3px;
+  width: 220px;
+  height: 22px;
+  box-sizing: border-box;
+}
+
+.categories-container .bxs-trash-alt {
+  color: crimson;
+  transition: all 0.2s ease-in-out;
+}
+
+.categories-container .bxs-trash-alt:hover {
+  cursor: pointer;
+  color: rgba(220, 20, 60, 0.384);
+}
+
+.button {
+  height: 22px;
+  border: none;
+  color: white;
+  background-color: black;
+  outline: 1px solid black;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 2px;
+  transition: all 0.2s ease-in-out;
+  white-space: nowrap;
+  padding: 0 10px;
+}
+
+.button:hover {
+  cursor: pointer;
+  background-color: white;
+  color: black;
+}
+
+.handle {
+  all: none;
+  font-size: 20px;
+}
+
+.handle:hover {
+  cursor: move;
+  font-size: 20px;
+}
+
+@media (max-width: 1250px) {
+  .categories-container {
+    grid-template-columns: repeat(3, minmax(0, 60000px));
+  }
+}
+
+@media (max-width: 1050px) {
+  .categories-container {
+    grid-template-columns: repeat(2, minmax(0, 60000px));
+  }
+}
+
+@media (max-width: 700px) {
+  .categories-container {
+    grid-template-columns: repeat(1, minmax(0, 60000px));
+  }
+}

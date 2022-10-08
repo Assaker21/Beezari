@@ -3,8 +3,6 @@ const express = require("express");
 const { isObjectIdOrHexString } = require("mongoose");
 const router = express.Router();
 const Product = require("../models/product");
-const canvas = require("canvas");
-global.Image = canvas.Image;
 
 var ObjectId = require("mongodb").ObjectId;
 

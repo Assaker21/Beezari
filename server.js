@@ -6,12 +6,12 @@ const express = require("express");
 const app = express();
 const expressLayouts = require("express-ejs-layouts");
 const bodyParser = require("body-parser");
-const path = require('path');
+const path = require("path");
 
 const indexRouter = require("./routes/index");
-const authorRouter = require("./routes/authors");
 const loginRouter = require("./routes/login");
 const productsRouter = require("./routes/products");
+const categoriesRouter = require("./routes/categories");
 
 app.set("view engine", "ejs");
 app.set("views", __dirname + "/views");
@@ -36,8 +36,8 @@ db.once("open", () => console.log("connection established"));
 
 // Router Usage Declaration
 app.use("/", indexRouter);
-app.use("/authors", authorRouter);
 app.use("/login", loginRouter);
 app.use("/products", productsRouter);
+app.use("/categories", categoriesRouter);
 
 app.listen(process.env.PORT || 3000);
