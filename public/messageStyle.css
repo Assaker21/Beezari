@@ -1,0 +1,49 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Karla", sans-serif;
+  text-decoration: none;
+  list-style: none;
+  scroll-behavior: smooth;
+}
+
+.message-container {
+    width: 100%;
+    max-width: 1366px;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.message {
+    padding: 0;
+    background-color: none;
+    opacity: 0;
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+.message.error {
+    padding: 10px 20px;
+    background-color: crimson;
+    color: white;
+    border-radius: 4px;
+    outline: 1px solid black;
+    opacity: 1;
+    display: inline;
+    width: auto;
+    height: auto;
+}
+
+.message.noterror {
+    padding: 10px 20px;
+    background-color: #01d24e;
+    color: white;
+    border-radius: 4px;
+    opacity: 1;
+    display: inline;
+    width: auto;
+    height: auto;
+}

@@ -11,9 +11,9 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     var categories = PopulateCategoriesObject(
-      req.body.categoryName,
-      req.body.subcategoryName,
-      req.body.microcategoryName,
+      ConvertToArray(req.body.categoryName),
+      ConvertToArray(req.body.subcategoryName),
+      ConvertToArray(req.body.microcategoryName),
       ConvertStringArrayToNumberArray(req.body.categoriesCount),
       ConvertStringArrayToNumberArray(req.body.subcategoriesCount),
       ConvertStringArrayToNumberArray(req.body.microcategoriesCount)
@@ -22,14 +22,24 @@ router.post("/", async (req, res) => {
     await Category.deleteMany({});
     await Category.insertMany(categories);
 
-    res.redirect("/");
+    res.redirect("/?state=noterror&text=Categories%20updated%20successfully");
   } catch (err) {
-    console.log(err);
-    res.redirect("/");
+    res.redirect("/?state=error&text=" + err.toString().replace(" ", "%20"));
   }
 });
 
-function ConvertStringArrayToNumberArray(arr) {
+function ConvertToArray(maybeArr) {
+  if (Object.prototype.toString.call(maybeArr) == "[object Array]") {
+    return maybeArr;
+  } else {
+    var arr = new Array(1);
+    arr[0] = maybeArr;
+    return arr;
+  }
+}
+
+function ConvertStringArrayToNumberArray(maybearr) {
+  var arr = ConvertToArray(maybearr);
   var new_arr = new Array(arr.length);
   for (i = 0; i < arr.length; i++) {
     new_arr[i] = parseInt(arr[i]);
@@ -45,22 +55,27 @@ function PopulateCategoriesObject(
   subsCount,
   microsCount
 ) {
-  var categories = new Array(catsCount);
+  var categories = new Array(cats);
+
+  var subsum = 0;
+  var microsum = 0;
   for (i = 0; i < catsCount; i++) {
     categories[i] = { name: cats[i], sub: new Array(subsCount[i]) };
 
-    var sum = 0;
     for (j = 0; j < subsCount[i]; j++) {
       categories[i].sub[j] = {
-        name: subs[i * subsCount[i] + j],
-        micro: new Array(microsCount[i * subsCount[i] + j]),
+        name: subs[subsum + j],
+        micro: new Array(microsCount[subsum + j]),
       };
 
-      sum += microsCount[i * subsCount[i] + j] - 1;
-      for (k = 0; k < microsCount[i * subsCount[i] + j]; k++) {
-        categories[i].sub[j].micro[k] = micros[sum + k + 1];
+      for (k = 0; k < microsCount[subsum + j]; k++) {
+        categories[i].sub[j].micro[k] = micros[microsum + k];
       }
+
+      microsum += microsCount[subsum + j];
     }
+
+    subsum += subsCount[i];
   }
 
   return categories;

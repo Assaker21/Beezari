@@ -5,8 +5,9 @@ FilePond.registerPlugin(
 );
 
 FilePond.setOptions({
-  imageResizeTargetWidth: 1024,
-  imageResizeTargetHeight: 1024,
+  imageResizeTargetWidth: 32,
+  imageResizeTargetHeight: 32,
+  imageResizeMode: "force",
   itemInsertLocation: "after",
   allowReorder: true,
 });

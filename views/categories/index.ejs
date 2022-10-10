@@ -1,5 +1,7 @@
 <%- include('../partials/header.ejs') %>
 
+<link rel="stylesheet" type="text/css" href="/categoriesStyle.css" />
+
 <form class="categories-container" action="/categories" method="POST">
     <% for(i = 0; i < categories.length; i++) {%>
     <div class="category-container">
@@ -12,6 +14,7 @@
                 <i class='bx bxs-trash-alt' ></i>
             </div>
             <div class="subcategories-container">
+                <% if(categories[i].sub != null && categories[i].sub.length != 0) {%>
                 <% for(j = 0; j < categories[i].sub.length; j++) {%>
                 <div class="subcategory-container">
                     <div class="subcategory-handle-container">
@@ -23,6 +26,7 @@
                             <i class='bx bxs-trash-alt' ></i>
                         </div>
                         <div class="microcategories-container">
+                            <% if(categories[i].sub[j].micro != null && categories[i].sub[j].micro.length != 0) {%>
                             <% for(k = 0; k < categories[i].sub[j].micro.length; k++) { %>
                             <div class="microcategory-container">
                                 <div class="microcategory-handle-container">
@@ -35,13 +39,13 @@
                                     </div>
                                 </div>  
                             </div>
-                            <% } %>   
+                            <% } }%>   
                             <input type="hidden" name="microcategoriesCount" class="microcategoriesCount">                 
                             <button class="microcategory-add-one button" type="button">ADD MICROCATEGORY</button>
                         </div>
                     </div>
                 </div>
-                <% } %>
+                <% } }%>
                 <input type="hidden" name="subcategoriesCount" class="subcategoriesCount">
                 <button class="subcategory-add-one button" type="button">ADD SUBCATEGORY</button>
             </div>
@@ -52,3 +56,6 @@
     <button class="category-add-one button" type="button">ADD CATEGORY</button>
     <button class="button" type="submit">SAVE</button>
 </form>
+
+<script defer src="/javascripts/Sortable.js"></script>
+<script defer src="/javascripts/categoriesClientSide.js"></script>

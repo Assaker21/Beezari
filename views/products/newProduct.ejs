@@ -7,46 +7,42 @@
 <div class="products-container">
   <div class="product-capsule">
     <div class="product-container">
-      <form method="POST" action="/products/edit">
+      <form method="POST" action="/products/new">
         <div class="product-images-container">
           <input class="filepond" name="uploadedImages" type="file" multiple data-max-file-size="10MB" data-max-files="8">
         </div>
         <div class="product-details-container">
         <div class="product-details-item">
           <label for="sku">SKU:</label>
-          <input id="sku" class="input" name="sku" value=<%= product.sku %>><br />
+          <input id="sku" class="input" name="sku" value="" required><br />
         </div>
         <div class="product-details-item">
           <label for="brand">Brand:</label>
-          <input id="brand" class="input" name="brand" value=<%= product.brand %>><br />
+          <input id="brand" class="input" name="brand" value="" required><br />
         </div>
         <div class="product-details-item">
           <label for="name">Name:</label>
-          <input id="name" class="input" name="name" value=<%= product.name %>><br />
+          <input id="name" class="input" name="name" value="" required><br />
         </div>
         <div class="product-details-item">
           <label for="short">Short Description:</label>
-          <textarea id="short" class="textarea" name="short"><%= product.short_description %></textarea><br />
+          <textarea id="short" class="textarea" name="short" required></textarea><br />
         </div>
         <div class="product-details-item">
           <label for="long">Long Description:</label>
-          <textarea rows="5" class="textarea" id="long" name="long"><%= product.long_description %></textarea><br />
+          <textarea rows="5" class="textarea" id="long" name="long" required></textarea><br />
         </div>
         <div class="product-details-item">
           <label for="price">Price:</label>
-          <input id="price" class="input" name="price" value=<%= product.price %>><br />
+          <input id="price" class="input" name="price" value="" required><br />
         </div>
         <div class="product-details-item">
           <label for="discounted">Discounted Price:</label>
-          <input id="discounted" class="input" name="discounted" value=<%= product.discounted_price %>><br />
+          <input id="discounted" class="input" name="discounted" value="" required><br />
         </div>
         <div class="product-details-item">
           <label for="quantity">Quantity:</label>
-          <input id="quantity" class="input" name="quantity" value=<%= product.quantity %>><br />
-        </div>
-        <div class="product-details-item">
-          <label for="purchase">Purchase Power:</label>
-          <span id="purchase"><%= product.purchase_power %></span>
+          <input id="quantity" class="input" name="quantity" value="" required><br />
         </div>
         
         <div class="product-details-categories">
@@ -65,18 +61,8 @@
                   <div class="product-microcategories-container">
                     <% for(k = 0; k < categories[i].sub[j].micro.length; k++) { %>
                     <div class="product-microcategory-container">
-                      <div class="product-microcategory-details">
-                        <% var found = false; %>
-                        <% for(m = 0; m < product.categories.length; m++) {%>
-                            <% if(product.categories[m].microcategory == categories[i].sub[j].micro[k] && product.categories[m].subcategory == categories[i].sub[j].name && product.categories[m].category == categories[i].name) { %>
-                              <% found = true; %>
-                              <input name="microcategoryState" class="product-microcategory-input" type="checkbox" checked value=<%= categories[i].name + ">" + categories[i].sub[j].name + ">" + categories[i].sub[j].micro[k]%>>
-                              <% break; %>
-                            <% } %>
-                        <% } %>
-                        <% if(!found) { %>
-                          <input name="microcategoryState" class="product-microcategory-input" type="checkbox" value="_none">
-                        <% } %>  
+                      <div class="product-microcategory-details">                    
+                        <input name="microcategoryState" class="product-microcategory-input" type="checkbox" value="_none">
                         <h6 class="product-microcategory-name"><%= categories[i].sub[j].micro[k] %></h6>
                       </div>
                     </div>
@@ -90,33 +76,36 @@
           </div> 
         </div>
         
-        <input type="hidden" name="id" value=<%= product._id.toString() %>>
         <button type="submit" class="product-save-button">SAVE</button>
         </div>
       </form>
       <div class="product-action-buttons-container">
         <form class="product-cancel-button-container" method="GET" action="/products">
-          <input type="hidden" name="id" value=<%= product._id.toString() %>>
           <button type="submit" class="product-cancel-button">CANCEL</button>
-        </form>
-        <form class="product-delete-button-container" method="POST" action="/products/delete">
-          <input type="hidden" name="id" value=<%= product._id.toString() %>>
-          <button type="submit" class="product-delete-button">DELETE</button>
         </form>
       </div>
     </div>
   </div>
   
 </div>
-<div class="old-images">
-  <% for(i = 0; i < product.images.length; i++) { %>
-    <% if(product.images[i] != "" && product.images[i] != null) { %>
-      <img src=<%= product.images[i] %> id=<%="old-image" + i%> class="old-image">
-    <% } %>
-  <% } %>  
-</div>
 
-<script defer src="/javascripts/editProductClientSide.js"></script>
+<script defer>
+    document.querySelectorAll(".product-microcategory-input").forEach((element) => {
+  element.addEventListener("click", (_element) => {
+    if (element.checked) {
+      const sub = element.parentElement.parentElement.parentElement.parentElement;
+      element.value = 
+      sub.parentElement.parentElement.querySelector(".product-category-name").textContent +
+        ">" +
+        sub.querySelector(".product-subcategory-name").textContent +
+        ">" +
+        _element.target.parentElement.querySelector(".product-microcategory-name").textContent;
+    } else {
+      element.value = "_none";
+    }
+  });
+});
+</script>
 <script defer src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js"></script>
     <script defer src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
     <script defer src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>

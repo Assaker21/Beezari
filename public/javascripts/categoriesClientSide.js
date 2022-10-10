@@ -11,6 +11,7 @@ function RefreshDeletes() {
   document.querySelectorAll(".bxs-trash-alt").forEach((element) => {
     element.addEventListener("click", (_element) => {
       _element.target.parentElement.parentElement.parentElement.remove();
+      RefreshCounts();
     });
   });
 }
@@ -37,7 +38,7 @@ function RefreshCategoryAdd() {
   </div>`;
         _element.target.parentElement.insertBefore(
           e,
-          _element.target.parentElement.firstChild
+          _element.target
         );
         RefreshDeletes();
         RefreshSubcategorySortable();
@@ -77,7 +78,7 @@ function RefreshSubcategoryAdd() {
       </div>`;
         _element.target.parentElement.insertBefore(
           e,
-          _element.target.parentElement.firstChild
+          _element.target
         );
         RefreshDeletes();
         RefreshMicrocategoryAdd();
@@ -115,7 +116,7 @@ function RefreshMicrocategoryAdd() {
       </div> `;
         _element.target.parentElement.insertBefore(
           e,
-          _element.target.parentElement.firstChild
+          _element.target
         );
         RefreshDeletes();
         RefreshCounts();

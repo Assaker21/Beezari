@@ -28,9 +28,13 @@ const productSchema = new mongoose.Schema({
   images: {
     type: Array,
   },
-  categories: {
-    type: Array,
-  },
+  categories: [
+    {
+      category: String,
+      subcategory: String,
+      microcategory: String,
+    },
+  ],
   quantity: {
     type: Number,
   },

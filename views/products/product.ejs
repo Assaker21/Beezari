@@ -48,8 +48,8 @@
         <label>Categories:</label> <br />
         <% for(i = 0; i < product.categories.length; i++) { %>
           <label><%= product.categories[i].category + " > "%></label>
-          <label><%= product.categories[i].sub_category + " > "%></label>
-          <label><%= product.categories[i].micro_category %></label>
+          <label><%= product.categories[i].subcategory + " > "%></label>
+          <label><%= product.categories[i].microcategory %></label>
           <br />
         <% } %>
       </div>
@@ -58,7 +58,11 @@
       <form class="product-edit-button-container" method="GET" action="/products/edit">
         <input type="hidden" name="id" value=<%= product._id.toString() %>>
         <button type="submit" class="product-edit-button">EDIT PRODUCT</button>
-    </form>
+      </form>
+      <form class="product-delete-button-container" method="POST" action="/products/delete">
+        <input type="hidden" name="id" value=<%= product._id.toString() %>>
+        <button type="submit" class="product-delete-button">DELETE PRODUCT</button>
+      </form>
     </div>
   </div>
 </div>
