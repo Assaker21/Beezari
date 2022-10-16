@@ -74,11 +74,12 @@ router.post("/new", async (req, res) => {
       req.body.uploadedImages == null ||
       req.body.uploadedImages.length == 0
     ) {
-      res.redirect("/?state=error&text=You%20did%20not%20add%20any%20images");
-      return;
+      /*res.redirect("/?state=error&text=You%20did%20not%20add%20any%20images");
+      return;*/
     }
-    saveImagesToVariable(newProduct, req.body.uploadedImages);
-
+    else {
+      saveImagesToVariable(newProduct, req.body.uploadedImages);
+    }
     await Product.insertMany([newProduct]);
 
     res.redirect("/products");
@@ -142,10 +143,12 @@ router.post("/edit", async (req, res) => {
       req.body.uploadedImages == null ||
       req.body.uploadedImages.length == 0
     ) {
-      res.redirect("/?state=error&text=You%20did%20not%20add%20any%20images");
-      return;
+      /*res.redirect("/?state=error&text=You%20did%20not%20add%20any%20images");
+      return;*/
     }
-    saveImagesToVariable(editedProduct, req.body.uploadedImages);
+    else {
+      saveImagesToVariable(editedProduct, req.body.uploadedImages);
+    }
 
     await Product.updateOne({ _id: ObjectId(req.body.id) }, editedProduct);
 

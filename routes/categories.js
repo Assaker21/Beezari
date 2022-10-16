@@ -60,21 +60,33 @@ function PopulateCategoriesObject(
   var subsum = 0;
   var microsum = 0;
   for (i = 0; i < catsCount; i++) {
-    categories[i] = { name: cats[i], sub: new Array(subsCount[i]) };
+    if (subsCount[i] == 0) {
+      categories[i] = { name: cats[i], sub: new Array(1) };
+      categories[i].sub[0] = { name: "ALL", micro: new Array(1) };
+      categories[i].sub[0].micro[0] = "ALL";
+    } else {
+      categories[i] = { name: cats[i], sub: new Array(subsCount[i]) };
 
-    for (j = 0; j < subsCount[i]; j++) {
-      categories[i].sub[j] = {
-        name: subs[subsum + j],
-        micro: new Array(microsCount[subsum + j]),
-      };
+      for (j = 0; j < subsCount[i]; j++) {
+        if (microsCount[subsum + j] == 0) {
+          categories[i].sub[j] = {
+            name: subs[subsum + j],
+            micro: new Array(1),
+          };
+          categories[i].sub[j].micro[0] = "ALL";
+        } else {
+          categories[i].sub[j] = {
+            name: subs[subsum + j],
+            micro: new Array(microsCount[subsum + j]),
+          };
 
-      for (k = 0; k < microsCount[subsum + j]; k++) {
-        categories[i].sub[j].micro[k] = micros[microsum + k];
+          for (k = 0; k < microsCount[subsum + j]; k++) {
+            categories[i].sub[j].micro[k] = micros[microsum + k];
+          }
+        }
+        microsum += microsCount[subsum + j];
       }
-
-      microsum += microsCount[subsum + j];
     }
-
     subsum += subsCount[i];
   }
 
