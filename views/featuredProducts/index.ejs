@@ -1,0 +1,87 @@
+<%- include('../partials/header.ejs') %>
+
+<link rel="stylesheet" type="text/css" href="/featuredProductsStyle.css" />
+<script defer src="/javascripts/Sortable.js"></script>
+<script defer src="/javascripts/featuredProductsClientSide.js"></script>
+
+<form class="fp-capsule" action="/featured-products" method="POST">
+  <% for(i = 0; i < featuredProducts.length; i++) { %>
+    <div class="fp-items-container">
+      <div class="fp-item-position"><%=featuredProducts[i].place%></div>
+      <input type="hidden" name="places" value="<%=featuredProducts[i].place%>">
+      <div class="fp-items-wrapper">
+        <% for(j = 0; j < featuredProducts[i].items.length; j++) { %>
+          <div class="fp-item-container">
+            <div class="fp-item-handle">
+              <i class="bx bx-menu"></i>
+            </div>
+            <div class="fp-item-details">
+              <label for="title">Title: </label>
+              <input class="title-input" name=<%="title_" + i + "_" + j%> type="text" value="<%=featuredProducts[i].items[j].title%>" id="title">
+              <button class="fp-delete-button" type="button">DELETE</button>
+              <div class="fp-products-container">
+                <% for(k = 0; k < featuredProducts[i].items[j].products.length; k++) { %>
+                  <div class="fp-product-container">
+                    <div class="fp-product-handle">
+                      <i class="bx bx-menu"></i>
+                    </div>
+                    <img
+                      src=<%=featuredProducts[i].items[j].products[k].image%>
+                    />
+                    <h4 class="fp-product-brand"><%=featuredProducts[i].items[j].products[k].brand%></h4>
+                    <h4 class="fp-product-name"><%=featuredProducts[i].items[j].products[k].name%></h4>
+                    <h4 class="fp-product-price"><%=featuredProducts[i].items[j].products[k].price%></h4>
+                    <h4 class="fp-product-discounted-price"><%=featuredProducts[i].items[j].products[k].discounted_price%></h4>
+                    <h4 class="fp-product-purchase-power"><%="Purchase Power: " + featuredProducts[i].items[j].products[k].purchase_power%></h4>
+                    <input type="hidden" name=<%="id_" + i + "_" + j + "_" + k%> class="product-id" value="<%=featuredProducts[i].items[j].products[k]._id.toString()%>">
+                    <button class="fp-product-button delete fp-product-delete-button" type="button">DELETE</button>
+                  </div>
+                <% } %>
+                <div class="fp-product-container search-box-container">
+                  <input
+                    class="search-box"
+                    value=""
+                    type="text"
+                    name="searchValue"
+                  />
+                  <div class="search-options-container">
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% } %>
+      </div>
+      <div class="fp-item-add-more-container">
+        <button class="fp-item-add-more fp-product-button" type="button">
+          ADD FEATURED SECTION
+        </button>
+      </div>
+    </div>
+  <% } %>  
+  <div class="fp-buttons-container">
+    <button class="fp-product-button presave" type="button">PRESAVE</button>
+    <button class="fp-product-button save" type="submit">SAVE</button>
+    <button class="fp-product-button cancel" type="button">CANCEL</button>
+  </div>
+</form>
+
+<div class="all-products">
+  <%for(i = 0; i < products.length; i++) {%>
+  <div class="one-product">
+    <h2 class="one-product-id"><%=products[i]._id%></h2>
+    <h2 class="one-product-name"><%=products[i].name%></h2>
+    <h2 class="one-product-brand"><%=products[i].brand%></h2>
+    <h2 class="one-product-price"><%=products[i].price%></h2>
+    <h2 class="one-product-discounted-price"><%=products[i].discountedPrice%></h2>
+    <h2 class="one-product-purchase-power"><%=products[i].purchasePower%></h2>
+    <img
+      width="200px"
+      height="200px"
+      class="one-product-img"
+      src=<%=products[i].img%>
+    />
+  </div>
+  <% } %>
+</div>

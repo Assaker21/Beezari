@@ -13,6 +13,7 @@ const indexRouter = require("./routes/index");
 const loginRouter = require("./routes/login");
 const productsRouter = require("./routes/products");
 const categoriesRouter = require("./routes/categories");
+const featuredProductsRouter = require("./routes/featuredProducts");
 
 app.set("view engine", "ejs");
 app.set("views", __dirname + "/views");
@@ -41,5 +42,6 @@ app.use("/", indexRouter);
 app.use("/login", loginRouter);
 app.use("/products", productsRouter);
 app.use("/categories", categoriesRouter);
+app.use("/featured-products", featuredProductsRouter);
 
 app.listen(process.env.PORT || 3000);
