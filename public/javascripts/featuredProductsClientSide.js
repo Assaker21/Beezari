@@ -241,11 +241,6 @@ function RefreshInputNames() {
   }
 }
 
-document.querySelector(".presave").addEventListener("click", () => {
-  RefreshInputNames();
-  alert("done!");
-});
-
 document.querySelector(".fp-capsule").addEventListener("submit", () => {
   RefreshInputNames();
 });
