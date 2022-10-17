@@ -1,0 +1,31 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Karla", sans-serif;
+  text-decoration: none;
+  list-style: none;
+  scroll-behavior: smooth;
+}
+
+form {
+    width: 100%;
+    max-width: 1366px;
+    margin: 0 auto;
+    display: grid;
+    place-items: center;
+}
+
+button {
+    padding: 20px;
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    background-color: transparent;
+}
+
+button:hover {
+    background-color: transparent;
+    text-decoration: underline;
+    cursor: pointer;
+}

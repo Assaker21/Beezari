@@ -1,9 +1,14 @@
 <%- include("./partials/header.ejs") %>
 
 <link rel="stylesheet" type="text/css" href="/messageStyle.css" />
+<link rel="stylesheet" type="text/css" href="/homeStyle.css" />
 
 <%if(typeof state !== "undefined") {%>
     <div class="message-container">
         <span class="message <%= state %>"><%= text %></span>
     </div>
 <% } %>
+
+<form action="/" method="POST">
+    <button type="submit">LOG OUT</button>
+</form>
