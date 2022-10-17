@@ -7,7 +7,7 @@ const Category = require("../models/category");
 
 var ObjectId = require("mongodb").ObjectId;
 
-router.get("/", async (req, res) => {
+router.get("/", checkAuthenticated, async (req, res) => {
   try {
     let searchOptions = {};
     const products = await Product.find(searchOptions);
@@ -26,7 +26,7 @@ router.post("/delete", async (req, res) => {
   }
 });
 
-router.get("/new", async (req, res) => {
+router.get("/new", checkAuthenticated, async (req, res) => {
   try {
     const categories = await Category.find({});
     res.render("products/newProduct", { categories: categories });
@@ -89,7 +89,7 @@ router.post("/new", async (req, res) => {
   }
 });
 
-router.get("/edit", async (req, res) => {
+router.get("/edit", checkAuthenticated, async (req, res) => {
   try {
     const product = await Product.findById(req.query.id);
     const categories = await Category.find({});
@@ -188,6 +188,15 @@ function ConvertToArray(maybeArr) {
     var arr = new Array(1);
     arr[0] = maybeArr;
     return arr;
+  }
+}
+
+function checkAuthenticated(req, res, next) {
+  if(req.isAuthenticated()) {
+      return next();
+  }
+  else {
+      res.redirect("/login");
   }
 }
 

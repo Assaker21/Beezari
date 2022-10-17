@@ -1,10 +1,10 @@
-<form class="login-container" action="/login" method="GET" >
+<form class="login-container" action="/login" method="POST" >
   <input
     type="text"
     class="login-input-box login-username-input"
     placeholder="Username"
     name="username"
-    value="<%= searchOptions.username %>"
+    value=""
   />
   <input
     type="password"
@@ -13,5 +13,7 @@
     name="password"
   />
   <button type="submit" class="login-button">Login</button>
-  <span class="login-message <%= connectionType %>"><%= connectionMessage %></span>
+  <% if(messages.error) { %>
+  <span class="login-message active error"><%= messages.error %></span>
+  <% } %>
 </form>

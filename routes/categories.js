@@ -3,7 +3,7 @@ const router = express.Router();
 
 const Category = require("../models/category");
 
-router.get("/", async (req, res) => {
+router.get("/", checkAuthenticated, async (req, res) => {
   const categories = await Category.find({});
   res.render("categories/index", { categories: categories });
 });
@@ -91,6 +91,15 @@ function PopulateCategoriesObject(
   }
 
   return categories;
+}
+
+function checkAuthenticated(req, res, next) {
+  if(req.isAuthenticated()) {
+      return next();
+  }
+  else {
+      res.redirect("/login");
+  }
 }
 
 module.exports = router;

@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const Product = require("../models/product");
 const FeaturedProducts = require("../models/featuredProducts");
 
-router.get("/", async (req, res) => {
+router.get("/", checkAuthenticated, async (req, res) => {
   try {
     const products = await Product.find({});
     const editedProducts = new Array(products.length);
@@ -108,6 +108,15 @@ function ConvertToArray(maybeArr) {
     var arr = new Array(1);
     arr[0] = maybeArr;
     return arr;
+  }
+}
+
+function checkAuthenticated(req, res, next) {
+  if(req.isAuthenticated()) {
+      return next();
+  }
+  else {
+      res.redirect("/login");
   }
 }
 
